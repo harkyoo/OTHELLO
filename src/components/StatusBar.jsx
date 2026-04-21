@@ -1,4 +1,11 @@
-function StatusBar({ message, currentPlayerLabel, gameOver, winnerLabel }) {
+function StatusBar({
+  message,
+  currentPlayerLabel,
+  gameOver,
+  winnerLabel,
+  gameModeLabel,
+  isThinking,
+}) {
   return (
     <section className="info-card status-card">
       <p className="info-card__eyebrow">게임 상태</p>
@@ -9,6 +16,10 @@ function StatusBar({ message, currentPlayerLabel, gameOver, winnerLabel }) {
             ? '승부가 나지 않았습니다.'
             : `${winnerLabel}이(가) 더 많은 돌을 확보했습니다.`
           : `현재 차례 플레이어: ${currentPlayerLabel}`}
+      </p>
+      <p className="status-card__submeta">
+        모드: {gameModeLabel}
+        {isThinking ? ' · AI가 생각 중입니다.' : ''}
       </p>
     </section>
   );

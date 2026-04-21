@@ -1,10 +1,10 @@
 # 진행 상황
 
 ## 현재 상태
-- 구현 계획의 8단계까지 완료했다.
-- 현재 프로젝트는 브라우저에서 플레이 가능한 MVP 오델로 게임 상태다.
-- 보드 렌더링, 클릭 입력, 점수 표시, 상태 메시지, 패스 처리, 종료 판정, 재시작 흐름이 모두 연결되어 있다.
-- 규칙 엔진과 상태 전이 로직에 대한 자동 테스트도 추가된 상태다.
+- AI 대전 모드 확장까지 완료했다.
+- 현재 프로젝트는 PvP와 AI 대전 모드를 모두 지원한다.
+- AI 모드에서는 백 돌을 AI가 자동으로 두며, 사용자 입력은 AI 턴 동안 잠긴다.
+- 규칙 엔진, 상태 전이, AI 의사결정 로직에 대한 자동 테스트가 준비된 상태다.
 
 ## 이번에 수행한 작업
 - `package.json`을 추가해 React 및 Vite 기반 개발 환경을 구성했다.
@@ -25,6 +25,15 @@
 - `package.json`에 `vitest`와 `npm test` 스크립트를 추가했다.
 - `tests/game/board.test.js`, `rules.test.js`, `gameState.test.js`를 추가해 보드 유틸리티, 규칙 엔진, 상태 전이를 검증할 수 있게 했다.
 - 유효 수 하이라이트와 마지막 착수 위치 강조를 실제 UI에 반영했다.
+- `memory-bank/implememtation-plan.md`에 AI 대전 확장 계획을 추가했다.
+- `src/game/ai.js`를 추가해 유효 수 중 최적 수를 고르는 휴리스틱 AI를 구현했다.
+- `src/game/constants.js`에 게임 모드, AI 플레이어, AI 생각 중 메시지, AI 딜레이 상수를 추가했다.
+- `src/hooks/useOthelloGame.js`에 게임 모드 상태, AI 자동 턴 처리, 입력 잠금 흐름을 추가했다.
+- `src/components/GameModeSelector.jsx`를 추가해 PvP/AI 모드 전환 UI를 구현했다.
+- `src/components/Board.jsx`, `Cell.jsx`에 비활성화 상태를 추가해 AI 턴 입력을 막았다.
+- `src/components/ScoreBoard.jsx`, `StatusBar.jsx`, `App.jsx`를 갱신해 AI 모드 정보를 표시하도록 확장했다.
+- `src/styles/ui.css`, `src/styles/board.css`를 갱신해 모드 선택 UI와 비활성 보드 표현을 추가했다.
+- `tests/game/ai.test.js`를 추가해 AI가 유효한 수를 고르는지와 코너를 우선하는지 검증했다.
 
 ## 검증 결과
 - `npm install` 완료
@@ -37,6 +46,9 @@
 - 연속 두 수 진행 후 보드 상태와 현재 턴이 기대값과 일치하는 것을 확인했다.
 - `npm test` 실행 결과 3개 테스트 파일, 10개 테스트가 모두 통과했다.
 - `npm run build`가 최종 상태에서도 성공했다.
+- AI 확장 후 `npm test` 결과 4개 테스트 파일, 12개 테스트가 모두 통과했다.
+- AI 확장 후 `npm run build`가 성공했다.
+- 초기 보드에서 백 플레이어 AI가 유효한 수를 정상적으로 선택하는 것을 확인했다.
 
 ## 현재 파일 기준 요약
 - `AGENTS.md`: 개발 원칙과 기술 스택 기준 문서
@@ -49,12 +61,15 @@
 - `src/game/rules.js`: 오델로 핵심 규칙 계산 엔진
 - `src/game/gameState.js`: 턴 전환과 패스/종료를 포함한 상태 전이 로직
 - `src/game/selectors.js`: UI가 사용할 파생 데이터 계산기
+- `src/game/ai.js`: AI 수 선택을 담당하는 휴리스틱 모듈
 - `src/hooks/useOthelloGame.js`: React에서 사용하는 게임 상태 연결 훅
 - `src/components/*`: 보드, 셀, 점수판, 상태바, 재시작 버튼 UI
 - `tests/game/*`: 규칙 계층과 상태 전이에 대한 자동 검증
 
 ## 다음 단계
-- AI 모드, 수순 기록, Undo 기능은 MVP 이후 확장 작업으로 분리한다.
+- AI 난이도 선택을 추가할 수 있다.
+- 현재 휴리스틱 AI를 Minimax 기반으로 교체하거나 병행할 수 있다.
+- 사람 선/후공 선택 기능을 추가할 수 있다.
 - 필요 시 모바일 UX를 더 다듬고 애니메이션을 추가할 수 있다.
 - 주요 기능을 확장할 때마다 이 문서와 `architecture.md`를 함께 갱신한다.
 - 이후 주요 변경이 끝날 때마다 이 문서를 지속적으로 업데이트한다.

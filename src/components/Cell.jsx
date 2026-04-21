@@ -1,9 +1,10 @@
-function Cell({ value, position, isValidMove, isLastMove, onClick }) {
+function Cell({ value, position, isValidMove, isLastMove, onClick, disabled }) {
   const classes = [
     'board-cell',
     value ? `board-cell--${value}` : '',
     isValidMove ? 'board-cell--valid' : '',
     isLastMove ? 'board-cell--last' : '',
+    disabled ? 'board-cell--disabled' : '',
   ]
     .filter(Boolean)
     .join(' ');
@@ -12,6 +13,7 @@ function Cell({ value, position, isValidMove, isLastMove, onClick }) {
     <button
       className={classes}
       type="button"
+      disabled={disabled}
       onClick={() => onClick(position)}
       aria-label={`${position.row + 1}행 ${position.col + 1}열`}
     >

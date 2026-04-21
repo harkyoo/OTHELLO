@@ -1,4 +1,4 @@
-import { PLAYERS } from './constants.js';
+import { GAME_MODES, PLAYERS } from './constants.js';
 import { getScore, getValidMoves } from './rules.js';
 
 export function getScoreView(board) {
@@ -33,4 +33,8 @@ export function hasValidMoveAt(validMoves, position) {
   return validMoves.some(
     (move) => move.row === position.row && move.col === position.col,
   );
+}
+
+export function getGameModeLabel(mode) {
+  return mode === GAME_MODES.AI ? 'AI 대전' : '2인 대전';
 }

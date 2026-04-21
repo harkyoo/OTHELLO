@@ -1,9 +1,13 @@
 import Cell from './Cell.jsx';
 
-function Board({ board, validMoves, lastMove, onCellClick }) {
+function Board({ board, validMoves, lastMove, onCellClick, disabled }) {
   return (
     <section className="board-panel">
-      <div className="board-grid" aria-label="오델로 보드" role="grid">
+      <div
+        className={`board-grid ${disabled ? 'board-grid--disabled' : ''}`}
+        aria-label="오델로 보드"
+        role="grid"
+      >
         {board.map((row, rowIndex) =>
           row.map((cell, colIndex) => {
             const position = { row: rowIndex, col: colIndex };
@@ -21,6 +25,7 @@ function Board({ board, validMoves, lastMove, onCellClick }) {
                 isValidMove={isValidMove}
                 isLastMove={isLastMove}
                 onClick={onCellClick}
+                disabled={disabled}
               />
             );
           }),

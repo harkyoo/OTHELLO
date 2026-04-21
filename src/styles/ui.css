@@ -37,6 +37,26 @@
   text-transform: uppercase;
 }
 
+.mode-toggle {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.mode-toggle__button {
+  padding: 14px 16px;
+  border: 1px solid rgba(47, 107, 69, 0.14);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.58);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.mode-toggle__button--active {
+  border-color: rgba(47, 107, 69, 0.52);
+  background: rgba(231, 241, 232, 0.95);
+}
+
 .score-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -60,6 +80,12 @@
   font-size: 0.92rem;
 }
 
+.score-card__owner {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
 .score-card__value {
   display: block;
   margin-top: 6px;
@@ -77,6 +103,12 @@
 .legend-card__text {
   margin-top: 10px;
   color: var(--muted);
+}
+
+.status-card__submeta {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 .restart-button {
