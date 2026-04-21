@@ -24,19 +24,8 @@ a {
 }
 
 .app-shell {
-  display: grid;
   min-height: 100vh;
-  place-items: center;
-  padding: 24px;
-}
-
-.app-panel {
-  width: min(100%, 720px);
-  padding: 40px 32px;
-  border: 1px solid var(--panel-border);
-  border-radius: 28px;
-  background: var(--panel);
-  box-shadow: var(--shadow);
+  padding: 40px 24px 56px;
 }
 
 .eyebrow {
@@ -48,7 +37,7 @@ a {
   text-transform: uppercase;
 }
 
-.app-panel h1 {
+h1 {
   margin-bottom: 16px;
   font-size: clamp(2rem, 5vw, 3.4rem);
   line-height: 1.1;
@@ -63,10 +52,5 @@ a {
 @media (max-width: 640px) {
   .app-shell {
     padding: 16px;
-  }
-
-  .app-panel {
-    padding: 28px 20px;
-    border-radius: 20px;
   }
 }

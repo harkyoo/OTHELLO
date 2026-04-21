@@ -1,10 +1,10 @@
 # 진행 상황
 
 ## 현재 상태
-- 구현 계획의 1단계인 프로젝트 초기화 작업을 완료했다.
-- 현재 프로젝트는 `Vite + React` 기반으로 실행 가능한 상태다.
-- 게임 규칙 로직, 보드 데이터 구조, 상태 전이 로직은 아직 구현하지 않았다.
-- 사용자 요청에 따라 테스트 검증 전까지 2단계 작업은 시작하지 않았다.
+- 구현 계획의 8단계까지 완료했다.
+- 현재 프로젝트는 브라우저에서 플레이 가능한 MVP 오델로 게임 상태다.
+- 보드 렌더링, 클릭 입력, 점수 표시, 상태 메시지, 패스 처리, 종료 판정, 재시작 흐름이 모두 연결되어 있다.
+- 규칙 엔진과 상태 전이 로직에 대한 자동 테스트도 추가된 상태다.
 
 ## 이번에 수행한 작업
 - `package.json`을 추가해 React 및 Vite 기반 개발 환경을 구성했다.
@@ -13,19 +13,48 @@
 - `src/styles/reset.css`, `src/styles/globals.css`를 추가해 기본 전역 스타일과 초기 UI 셸을 구성했다.
 - `src/components`, `src/game`, `src/hooks`, `src/styles`, `tests/game`, `public` 디렉터리 구조를 정리했다.
 - `.gitignore`를 추가해 `node_modules`와 `dist`가 버전 관리에 포함되지 않도록 했다.
+- `src/game/constants.js`에 보드 크기, 플레이어 상수, 방향 벡터, 초기 배치, 상태 메시지를 정의했다.
+- `src/game/board.js`에 빈 보드 생성, 초기 보드 생성, 범위 검사, 셀 읽기/쓰기 유틸리티를 추가했다.
+- `src/game/rules.js`에 유효 수 판별, 뒤집기 계산, 착수 적용, 점수 계산, 종료 판정, 승자 계산을 구현했다.
+- `src/game/gameState.js`에 한 턴 진행, 패스 처리, 종료 처리, 재시작 상태 생성 로직을 구현했다.
+- `src/game/selectors.js`에 점수와 유효 수 같은 파생 데이터 접근 함수를 추가했다.
+- `src/hooks/useOthelloGame.js`를 추가해 React 상태와 게임 상태 전이를 연결했다.
+- `src/components/Board.jsx`, `Cell.jsx`, `ScoreBoard.jsx`, `StatusBar.jsx`, `RestartButton.jsx`를 추가했다.
+- `src/styles/board.css`, `src/styles/ui.css`를 추가해 실제 게임 화면 레이아웃과 보드 스타일을 구성했다.
+- `src/App.jsx`를 실제 게임 화면 조합 역할로 교체했다.
+- `package.json`에 `vitest`와 `npm test` 스크립트를 추가했다.
+- `tests/game/board.test.js`, `rules.test.js`, `gameState.test.js`를 추가해 보드 유틸리티, 규칙 엔진, 상태 전이를 검증할 수 있게 했다.
+- 유효 수 하이라이트와 마지막 착수 위치 강조를 실제 UI에 반영했다.
 
 ## 검증 결과
 - `npm install` 완료
 - `npm run build` 성공
 - 브라우저에서 확인 가능한 최소 React 앱 셸을 준비함
+- 초기 보드 기준 흑/백 유효 수 4개씩 생성되는 것을 확인했다.
+- 첫 유효 착수 후 점수가 `흑 4`, `백 1`로 계산되는 것을 확인했다.
+- 첫 착수 후 다음 턴이 백으로 정상 전환되는 것을 확인했다.
+- 실제 UI 연결 이후에도 `npm run build`가 성공하는 것을 확인했다.
+- 연속 두 수 진행 후 보드 상태와 현재 턴이 기대값과 일치하는 것을 확인했다.
+- `npm test` 실행 결과 3개 테스트 파일, 10개 테스트가 모두 통과했다.
+- `npm run build`가 최종 상태에서도 성공했다.
 
 ## 현재 파일 기준 요약
 - `AGENTS.md`: 개발 원칙과 기술 스택 기준 문서
 - `memory-bank/game-design-document.md`: 게임 기획 및 규칙 기준 문서
 - `memory-bank/implememtation-plan.md`: 단계별 구현 계획 문서
 - `memory-bank/progress.md`: 현재 작업 이력과 진행 상태 기록
+- `memory-bank/architecture.md`: 파일 책임과 구조적 경계 설명 문서
+- `src/game/constants.js`: 규칙과 상태에서 공유하는 상수 모음
+- `src/game/board.js`: 보드 생성과 기본 조작 유틸리티
+- `src/game/rules.js`: 오델로 핵심 규칙 계산 엔진
+- `src/game/gameState.js`: 턴 전환과 패스/종료를 포함한 상태 전이 로직
+- `src/game/selectors.js`: UI가 사용할 파생 데이터 계산기
+- `src/hooks/useOthelloGame.js`: React에서 사용하는 게임 상태 연결 훅
+- `src/components/*`: 보드, 셀, 점수판, 상태바, 재시작 버튼 UI
+- `tests/game/*`: 규칙 계층과 상태 전이에 대한 자동 검증
 
 ## 다음 단계
-- 사용자 테스트 검증이 끝나면 2단계인 게임 데이터 구조 구현을 시작한다.
-- 다음 구현부터는 `src/game` 하위에 보드 모델과 상수 정의를 우선 추가한다.
+- AI 모드, 수순 기록, Undo 기능은 MVP 이후 확장 작업으로 분리한다.
+- 필요 시 모바일 UX를 더 다듬고 애니메이션을 추가할 수 있다.
+- 주요 기능을 확장할 때마다 이 문서와 `architecture.md`를 함께 갱신한다.
 - 이후 주요 변경이 끝날 때마다 이 문서를 지속적으로 업데이트한다.
