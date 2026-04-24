@@ -28,7 +28,7 @@ function App() {
   return (
     <main className="app-shell">
       <section className="hero-panel">
-        <div>
+        <div className="hero-panel__lead">
           <p className="eyebrow">Othello MVP</p>
           <h1>React로 구동되는 오델로와 AI 대전</h1>
         </div>

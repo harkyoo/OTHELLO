@@ -1,10 +1,22 @@
 .hero-panel {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
   gap: 24px;
   align-items: end;
   width: min(1180px, 100%);
   margin-bottom: 28px;
+}
+
+.hero-panel__lead {
+  min-width: 0;
+}
+
+.hero-panel__lead h1 {
+  white-space: nowrap;
+}
+
+.hero-panel .description {
+  justify-self: end;
 }
 
 .game-layout {
@@ -129,7 +141,12 @@
 @media (max-width: 980px) {
   .hero-panel {
     display: grid;
+    grid-template-columns: 1fr;
     margin-bottom: 20px;
+  }
+
+  .hero-panel__lead h1 {
+    white-space: normal;
   }
 
   .game-layout {
