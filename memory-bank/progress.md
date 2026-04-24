@@ -34,6 +34,8 @@
 - `src/components/ScoreBoard.jsx`, `StatusBar.jsx`, `App.jsx`를 갱신해 AI 모드 정보를 표시하도록 확장했다.
 - `src/styles/ui.css`, `src/styles/board.css`를 갱신해 모드 선택 UI와 비활성 보드 표현을 추가했다.
 - `tests/game/ai.test.js`를 추가해 AI가 유효한 수를 고르는지와 코너를 우선하는지 검증했다.
+- `vite.config.js`에 `base: './'` 설정을 추가해 GitHub Pages의 브랜치 배포 환경에서도 정적 자산 경로가 깨지지 않도록 맞췄다.
+- `.github/workflows/deploy.yml`을 추가해 `main` 브랜치 푸시 또는 수동 실행 시 테스트와 빌드를 거쳐 결과물을 `deploy` 브랜치로 배포하도록 구성했다.
 
 ## 검증 결과
 - `npm install` 완료
@@ -49,6 +51,8 @@
 - AI 확장 후 `npm test` 결과 4개 테스트 파일, 12개 테스트가 모두 통과했다.
 - AI 확장 후 `npm run build`가 성공했다.
 - 초기 보드에서 백 플레이어 AI가 유효한 수를 정상적으로 선택하는 것을 확인했다.
+- GitHub Pages 배포 구성을 추가한 뒤에도 `npm test` 결과 4개 테스트 파일, 12개 테스트가 모두 통과했다.
+- GitHub Pages 배포 구성을 추가한 뒤에도 `npm run build`가 성공했다.
 
 ## 현재 파일 기준 요약
 - `AGENTS.md`: 개발 원칙과 기술 스택 기준 문서
