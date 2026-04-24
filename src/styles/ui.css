@@ -2,12 +2,13 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
   gap: 24px;
-  align-items: end;
+  align-items: start;
   width: min(1180px, 100%);
   margin-bottom: 28px;
 }
 
 .hero-panel__lead {
+  grid-column: 1 / -1;
   min-width: 0;
 }
 
@@ -16,7 +17,9 @@
 }
 
 .hero-panel .description {
+  grid-column: 2;
   justify-self: end;
+  margin-top: -4px;
 }
 
 .game-layout {
